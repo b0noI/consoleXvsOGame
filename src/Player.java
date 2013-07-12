@@ -5,7 +5,11 @@ public class Player {
             this.name = name;
         }
     }
-    public void Move(int x, int y, xvsoGame.State state) {
+    public String toString() {
+        return name;
+    }
+
+    public void Move(int x, int y, gameArea.State state) {
         return;
     }
 }
