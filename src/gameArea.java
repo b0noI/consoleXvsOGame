@@ -1,4 +1,16 @@
 public class gameArea {
+    public static final int GAME_WIN = 1;
+    public static final int GAME_DRAW = 0;
+    public static final int GAME_RUN = -1;
+    public static final int FAILED_MOVE = -2;
+
+    public static boolean firstPlayer = false;
+
+    private int result;
+    public int getResult() {
+        return result;
+    }
+
     public enum State{ Blank, X, O };
 
     private final int minSize = 3;
@@ -34,14 +46,15 @@ public class gameArea {
         return temp;
     }
 
-    public void Move(int x, int y, State state) {
+    public void move(int x, int y, State state) {
         if (board[x][y] == State.Blank) {
             board[x][y] = state;
         } else {
             System.out.println("Not valid move");
+            result = FAILED_MOVE;
             return;
         }
         moveCount++;
-
+        result = GAME_DRAW;
     }
 }

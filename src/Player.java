@@ -10,6 +10,7 @@ public class Player {
     }
 
     public void Move(int x, int y, gameArea.State state) {
+
         return;
     }
 }
