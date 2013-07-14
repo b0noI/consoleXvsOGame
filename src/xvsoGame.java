@@ -3,20 +3,22 @@ import java.io.*;
 
 public class xvsoGame {
     public static void main(String[] args) {
-        System.out.println("X vs. O console game");
+        System.out.println("X vs. O console game.");
 
-        Player player1 = new Player();
-        Player player2 = new Player();
         gameArea game = new gameArea();
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        try {
-            System.out.print("Enter board size: ");
-            game.setBoardSize(Integer.parseInt(br.readLine()));
-        } catch (Exception ex) {
-            System.out.println("Error input");
-            System.out.println(ex.getMessage());
+        while (true) {
+            try {
+                System.out.print("Enter board size: ");
+                if (game.setBoardSize(Integer.parseInt(br.readLine()))) {
+                    break;
+                }
+            } catch (Exception ex) {
+                System.out.println("Error input.");
+                System.out.println(ex.getMessage());
+            }
         }
 
         System.out.println(game.toString());
@@ -26,9 +28,9 @@ public class xvsoGame {
             gameArea.firstPlayer = !gameArea.firstPlayer;
             int x, y;
             if (gameArea.firstPlayer) {
-                System.out.println("First player move:");
+                System.out.println("First player move");
             } else {
-                System.out.println("Second player move:");
+                System.out.println("Second player move");
             }
 
             while (true) {
@@ -45,6 +47,7 @@ public class xvsoGame {
                     }
 
                     if (game.getResult() == gameArea.FAILED_MOVE) {
+                        System.out.println("Not valid move.");
                         continue;
                     } else
                         break;
@@ -54,28 +57,13 @@ public class xvsoGame {
                 }
             }
             System.out.println(game.toString());
-        } while (game.getResult() != gameArea.GAME_RUN);
+        } while (game.getResult() == gameArea.GAME_RUN);
 
-
-
-//        try {
-//            System.out.print("First player name: ");
-//            player1.setName(br.readLine());
-//            System.out.println(player1.toString());
-//        } catch (Exception ex) {
-//            System.out.println("Error input");
-//        }
-//
-//        try {
-//            System.out.print("Second player name: ");
-//            player2.setName(br.readLine());
-//            System.out.println(player2.toString());
-//        } catch (Exception ex) {
-//            System.out.println("Error input");
-//        }
-//
-//
-//        player1.Move();
-
+        if (game.getResult() == gameArea.GAME_DRAW) {
+            System.out.println("Game over. Draw.");
+        } else if (game.getResult() == gameArea.GAME_WIN) {
+            String state = (gameArea.firstPlayer) ? "X." : "O.";
+            System.out.println("Game over. Win " + state);
+        }
     }
 }

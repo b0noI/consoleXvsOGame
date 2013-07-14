@@ -8,9 +8,4 @@ public class Player {
     public String toString() {
         return name;
     }
-
-    public void Move(int x, int y, gameArea.State state) {
-
-        return;
-    }
 }
